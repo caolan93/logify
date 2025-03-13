@@ -8,6 +8,27 @@
       "when": 1741893655111,
       "tag": "0000_aspiring_nova",
       "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1741895052339,
+      "tag": "0001_regular_tyger_tiger",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1741895345525,
+      "tag": "0002_overconfident_mandroid",
+      "breakpoints": false
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1741896292024,
+      "tag": "0003_black_spot",
+      "breakpoints": false
     }
   ]
 }
