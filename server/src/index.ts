@@ -1,14 +1,31 @@
-import { logger } from './utils/logger';
+import { env } from './config/env';
+import { db } from './db';
 import { buildServer } from './utils/server';
+import { migrate } from 'drizzle-orm/node-postgres/migrator';
+
+async function gracefulShutdown(app: Awaited<ReturnType<typeof buildServer>>) {
+	await app.close();
+}
 
 async function main() {
 	const app = await buildServer();
 
-	app.listen({
-		port: 3000,
+	await app.listen({
+		port: env.PORT,
+		host: env.HOST,
 	});
 
-	logger.info(`Server is running at HTTP PORT 3000`);
+	await migrate(db, {
+		migrationsFolder: './src/migrations',
+	});
+	const signals = ['SIGINT', 'SIGTERM'];
+
+	for (const signal of signals) {
+		process.on(signal, () => {
+			console.log('Signal', signal);
+			gracefulShutdown(app);
+		});
+	}
 }
 
 main();

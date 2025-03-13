@@ -3,14 +3,17 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "tsx watch src/index.ts"
+		"dev": "tsx watch src/index.ts",
+		"migrate": "drizzle-kit generate --config=./drizzle.config.ts"
 	},
 	"author": "",
 	"license": "ISC",
 	"description": "",
 	"dependencies": {
+		"@types/node": "^22.13.10",
+		"@types/pg": "^8.11.11",
 		"argon2": "^0.41.1",
+		"drizzle-kit": "^0.30.5",
 		"drizzle-orm": "^0.40.0",
 		"fastify": "^4.29.0",
 		"fastify-guard": "^3.0.1",
