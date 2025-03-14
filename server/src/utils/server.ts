@@ -15,7 +15,7 @@ export async function buildServer() {
 		prefix: '/api/v1/applications',
 	});
 	app.register(userRoutes, {
-		prefix: '/api/v1/applications',
+		prefix: '/api/v1/users',
 	});
 
 	return app;

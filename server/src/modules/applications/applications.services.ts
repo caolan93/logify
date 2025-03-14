@@ -11,13 +11,7 @@ export async function createApplication(
 }
 
 export async function getApplications() {
-	const result = await db
-		.select({
-			id: applications.id,
-			name: applications.name,
-			createdAt: applications.createdAt,
-		})
-		.from(applications);
+	const result = await db.select().from(applications);
 
 	return result;
 }

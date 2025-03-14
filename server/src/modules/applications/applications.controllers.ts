@@ -26,7 +26,7 @@ export async function createApplicationHandler(
 			name: SYSTEM_ROLES.SUPER_ADMIN,
 			permissions: ALL_PERMISSIONS as unknown as Array<string>,
 		}),
-		await createRole({
+		createRole({
 			applicationId: application.id,
 			name: SYSTEM_ROLES.APPLICATION_USER,
 			permissions: USER_ROLE_PERMISSIONS,
