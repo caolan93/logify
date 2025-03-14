@@ -1,5 +1,5 @@
-import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
-import { applications, users } from '../../db/schema';
+import { eq, InferInsertModel, InferSelectModel } from 'drizzle-orm';
+import { applications, users, usersToRoles } from '../../db/schema';
 import { db } from '../../db';
 import argon2 from 'argon2';
 
@@ -26,4 +26,21 @@ export async function getUsers() {
 	const result = await db.select().from(users);
 
 	return result;
+}
+
+export async function getUsersByApplication(applicationId: string) {
+	const result = await db
+		.select()
+		.from(users)
+		.where(eq(users.applicationId, applicationId));
+
+	return result;
+}
+
+export async function assignRoleToUser(
+	data: InferSelectModel<typeof usersToRoles>,
+) {
+	const { rows } = await db.insert(usersToRoles).values(data);
+
+	return rows[0];
 }
