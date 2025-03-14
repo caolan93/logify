@@ -48,5 +48,5 @@ export async function createApplicationHandler(
 }
 
 export async function getApplicationsHandler() {
-	return getApplications();
+	return await getApplications();
 }
