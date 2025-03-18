@@ -75,7 +75,7 @@ export async function loginUser(
 ) {
 	const { email, applicationId, password } = request.body;
 
-	const user = getUserByEmail(email, applicationId);
+	const user = await getUserByEmail(email, applicationId);
 
 	if (!user) {
 		return reply.code(400).send({
@@ -83,15 +83,15 @@ export async function loginUser(
 		});
 	}
 
-	return user;
-
 	const token = jwt.sign(
 		{
+			id: user.id,
 			applicationId,
 			email,
+			scopes: user.permissions,
 		},
 		'secret',
-	); // Chnage this secret or signing method or get fired
+	);
 
 	return { token };
 }
