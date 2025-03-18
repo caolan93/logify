@@ -1,6 +1,7 @@
 export const ALL_PERMISSIONS = [
 	// users
 	'users:roles:write',
+	'users:roles:read',
 	'users:roles:delete',
 
 	// posts

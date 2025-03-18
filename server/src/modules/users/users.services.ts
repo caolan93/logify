@@ -39,11 +39,11 @@ export async function getUsersByApplication(applicationId: string) {
 }
 
 export async function assignRoleToUser(
-	data: InferSelectModel<typeof usersToRoles>,
+	data: InferInsertModel<typeof usersToRoles>,
 ) {
-	const result = await db.insert(usersToRoles).values(data);
+	const result = await db.insert(usersToRoles).values(data).returning();
 
-	return result;
+	return result[0];
 }
 
 export async function getUserByEmail(email: string, applicationId: string) {

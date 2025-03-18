@@ -1,10 +1,15 @@
 import { FastifyInstance } from 'fastify';
 import {
+	assignRoleToUserHandler,
 	createUserHandler,
 	getUserHandler,
 	loginUser,
 } from './users.controllers';
-import { createUserJsonSchema, loginJsonSchema } from './users.schema';
+import {
+	assignRoleToUserJsonSchema,
+	createUserJsonSchema,
+	loginJsonSchema,
+} from './users.schema';
 
 export async function userRoutes(app: FastifyInstance) {
 	app.post(
@@ -21,5 +26,10 @@ export async function userRoutes(app: FastifyInstance) {
 			schema: loginJsonSchema,
 		},
 		loginUser,
+	);
+	app.post(
+		'/roles',
+		{ schema: assignRoleToUserJsonSchema },
+		assignRoleToUserHandler,
 	);
 }
