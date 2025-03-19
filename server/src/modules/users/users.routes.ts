@@ -6,10 +6,12 @@ import {
 	loginUser,
 } from './users.controllers';
 import {
+	AssignRoleToUserBody,
 	assignRoleToUserJsonSchema,
 	createUserJsonSchema,
 	loginJsonSchema,
 } from './users.schema';
+import { PERMISSIONS } from '../../config/permissions';
 
 export async function userRoutes(app: FastifyInstance) {
 	app.post(
@@ -27,9 +29,12 @@ export async function userRoutes(app: FastifyInstance) {
 		},
 		loginUser,
 	);
-	app.post(
+	app.post<{ Body: AssignRoleToUserBody }>(
 		'/roles',
-		{ schema: assignRoleToUserJsonSchema },
+		{
+			schema: assignRoleToUserJsonSchema,
+			onRequest: [app.guard.scope([PERMISSIONS['users:roles:write']])],
+		},
 		assignRoleToUserHandler,
 	);
 }
